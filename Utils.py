@@ -199,15 +199,19 @@ def plot_test_generated_images_for_model(output_dir, generator, x_test_hr, x_tes
         plt.figure(figsize=figsize)
     
         plt.subplot(dim[0], dim[1], 1)
-        plt.imshow(image_batch_lr[index], interpolation='nearest')
+        
+        image_lr = cv2.cvtColor(image_batch_lr[index], cv2.COLOR_RGB2BGR)
+        plt.imshow(image_lr, interpolation='nearest')
         plt.axis('off')
         
         plt.subplot(dim[0], dim[1], 2)
-        plt.imshow(generated_image[index], interpolation='nearest')
+        image_gi = cv2.cvtColor(generated_image[index], cv2.COLOR_RGB2BGR)
+        plt.imshow(image_gi, interpolation='nearest')
         plt.axis('off')
     
         plt.subplot(dim[0], dim[1], 3)
-        plt.imshow(image_batch_hr[index], interpolation='nearest')
+        image_hr = cv2.cvtColor(image_batch_hr[index], cv2.COLOR_RGB2BGR)
+        plt.imshow(image_hr, interpolation='nearest')
         plt.axis('off')
     
         plt.tight_layout()
