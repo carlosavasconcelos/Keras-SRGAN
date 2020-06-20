@@ -14,6 +14,7 @@ from numpy import array
 from numpy.random import randint
 import os
 import sys
+import cv2
 from PIL import Image
 
 import matplotlib.pyplot as plt
