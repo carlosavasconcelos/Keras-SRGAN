@@ -12,9 +12,9 @@ from skimage import data, io, filters
 import numpy as np
 from numpy import array
 from numpy.random import randint
-from scipy.misc import imresize
 import os
 import sys
+from PIL import Image
 
 import matplotlib.pyplot as plt
 plt.switch_backend('agg')
@@ -41,7 +41,9 @@ def lr_images(images_real , downscale):
     
     images = []
     for img in  range(len(images_real)):
-        images.append(imresize(images_real[img], [images_real[img].shape[0]//downscale,images_real[img].shape[1]//downscale], interp='bicubic', mode=None))
+        #images.append(imresize(images_real[img], [images_real[img].shape[0]//downscale,images_real[img].shape[1]//downscale], interp='bicubic', mode=None))
+        images.append(np.array(Image.fromarray(images_real[img]).resize((images_real[img].shape[0]//downscale,images_real[img].shape[1]//downscale), resample=Image.BICUBIC)))
+
     images_lr = array(images)
     return images_lr
     
@@ -71,7 +73,7 @@ def load_data_from_dirs(dirs, ext):
     for d in dirs:
         for f in os.listdir(d): 
             if f.endswith(ext):
-                image = data.imread(os.path.join(d,f))
+                image = cv2.imread(os.path.join(d,f))
                 if len(image.shape) > 2:
                     files.append(image)
                     file_names.append(os.path.join(d,f))
